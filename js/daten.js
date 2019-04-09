@@ -109,7 +109,6 @@ $(document).ready(function () {
 			console.log(entry);
 			return '<a href value="' + entry + '" class="label label-' + labeltype + '">' + entry + '</a>';
 		}).join(' – ');
-		console.log(htm);
 		$(".nav-filter-" + mode).html(htm);
 		//toggle filter properties
 		$(".nav-filter-" + mode + " a").click(function (e) {
@@ -144,7 +143,6 @@ $(document).ready(function () {
 	$('#start').removeClass('hidden');
 
 	$('#default_entry').addClass('active');
-	console.log($('#default_entry'));
 
 	//expand/collapse filtersection
 	$(".nav-filter-toggle").click(function (e) {
