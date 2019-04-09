@@ -1,8 +1,10 @@
 $(document).ready(function () {
-	if(!window.location.hash) {
-  		$('.data-entry').addClass('hidden');
-	}
-	
+	selectedId = window.location.hash ? window.location.hash.substr(1) : 'start';
+	$('.data-entry').map(function () {
+		if (this.id != selectedId) {
+			$(this).addClass('hidden');
+		}
+	});
 
 	var filter = {
 		category: null,
@@ -137,10 +139,6 @@ $(document).ready(function () {
 	//HACK: Set filter for 2015
 //	filter['years'] = '2015';
 	buildEntryList();
-
-
-	//show start
-	$('#start').removeClass('hidden');
 
 	$('#default_entry').addClass('active');
 
