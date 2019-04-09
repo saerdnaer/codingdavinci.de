@@ -1,17 +1,27 @@
 $(document).ready(function () {
-	selectedId = window.location.hash ? window.location.hash.substr(1) : 'start';
-	$('.data-entry').map(function () {
-		if (this.id != selectedId) {
-			$(this).addClass('hidden');
-		}
-	});
-
 	var filter = {
 		category: null,
 		type: null,
 		license: null,
 		years: null
 	};
+	var selectedId = 'start';
+	if (window.location.hash) {
+		if (window.location.hash.substr(0, 7) == '#event=') {
+			filter.years = decodeURI(window.location.hash.substr(7)).replace('-', ' ');
+			// upper case first char again
+			filter.years = filter.years[0].toUpperCase() + filter.years.substr(1);
+			console.log(filter);
+		} else {
+			selectedId = window.location.hash.substr(1);
+		}
+	}
+
+	$('.data-entry').map(function () {
+		if (this.id != selectedId) {
+			$(this).addClass('hidden');
+		}
+	});
 	var all_entries = [];
 	var default_entry;
 
@@ -138,6 +148,11 @@ $(document).ready(function () {
 			mode != 'types' && fillFilter('types', 'info');
 			mode != 'licenses' && fillFilter('licenses', 'danger');
 			buildEntryList();
+
+			if (mode == 'years') {
+				window.location.hash = val ? '#event=' + val.toLowerCase().replace(' ', '-') : '';
+			}
+
 			e.stopPropagation();
 			return false;
 		});
