@@ -10,7 +10,7 @@ $(document).ready(function () {
 		category: null,
 		type: null,
 		license: null,
-		year: null
+		years: null
 	};
 	var all_entries = [];
 	var default_entry;
@@ -108,7 +108,6 @@ $(document).ready(function () {
 			return 0;
 		});
 		var htm = list.map(function (entry) {
-			console.log(entry);
 			return '<a href value="' + entry + '" class="label label-' + labeltype + '">' + entry + '</a>';
 		}).join(' – ');
 		$(".nav-filter-" + mode).html(htm);
@@ -130,11 +129,11 @@ $(document).ready(function () {
 	}
 
 	collectEntries();
-	fillFilter('categories', 'default');
+	//fillFilter('categories', 'default');
 	fillFilter('types', 'info');
 	fillFilter('licenses', 'danger');
 	fillFilter('years', 'warning');
-	fillFilter('region', 'primary');
+	//fillFilter('region', 'primary');
 	
 	//HACK: Set filter for 2015
 //	filter['years'] = '2015';
