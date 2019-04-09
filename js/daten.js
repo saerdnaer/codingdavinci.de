@@ -83,6 +83,16 @@ $(document).ready(function () {
 				entry.region.push($(e).text());
 			});
 
+			if (filter.years && entry.years.indexOf(filter.years) < 0) {
+				return;
+			}
+			if (filter.types && entry.types.indexOf(filter.types) < 0) {
+				return;
+			}
+			if (filter.licenses && entry.licenses.indexOf(filter.licenses) < 0) {
+				return;
+			}
+
 			if (entry.id !== 'start')
 				all_entries.push(entry);
 		});
@@ -108,7 +118,7 @@ $(document).ready(function () {
 			return 0;
 		});
 		var htm = list.map(function (entry) {
-			return '<a href value="' + entry + '" class="label label-' + labeltype + '">' + entry + '</a>';
+			return '<a href value="' + entry + '" class="label label-' + labeltype + (filter[mode] == entry ? ' active' : '') + '">' + entry + '</a>';
 		}).join(' – ');
 		$(".nav-filter-" + mode).html(htm);
 		//toggle filter properties
@@ -122,6 +132,11 @@ $(document).ready(function () {
 			if (val) {
 				$(e.currentTarget).addClass('active');
 			}
+			// rebuild filter list when changing filters
+			all_entries = [];
+			collectEntries();
+			mode != 'types' && fillFilter('types', 'info');
+			mode != 'licenses' && fillFilter('licenses', 'danger');
 			buildEntryList();
 			e.stopPropagation();
 			return false;
