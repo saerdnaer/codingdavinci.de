@@ -16,6 +16,7 @@ $(document).ready(function () {
 	function scrollToAnchor(aid) {
 		var aTag = $("#" + aid);
 		$('html,body').animate({scrollTop: aTag.offset().top - 50}, 'slow');
+		window.location.hash = aid;
 	}
 
 	function buildEntryList() {
